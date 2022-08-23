@@ -1,31 +1,43 @@
-import { useEffect, useState } from "react";
-import { Button, Container, Form, InputGroup, Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import { useProfile } from "../context/ProfileContext";
-import { Main } from "../pages/main/Main";
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import {Navbar} from 'react-bootstrap';
+import { useProfile } from '../context/ProfileContext';
 
-export function Navbar(){
+export function Header(){
 
     const {
-        getProfile,
-        loadData,
         handleProfileChange,
         handleClick
     } = useProfile();
 
     return (
-        <header className="bg-dark text-light d-flex border-bottom border-white" style={{height: "70px"}}>
-            <nav className="d-flex justify-content-around align-items-center" style={{width: "100%"}}>
-                <Nav.Link>
-                    Github Search
-                </Nav.Link>
-                <Form className="d-flex align-items-center">
-                    <Form.Group className="px-2">
-                        <Form.Control className="form-control-sm" onChange={handleProfileChange} placeholder="Profile Name"></Form.Control>
-                    </Form.Group>
-                    <Button size="sm" onClick={handleClick}>Search</Button>
-                </Form>
-            </nav>
+        <header className="text-light">
+            <Navbar bg="dark" expand="lg" variant="dark">
+                <Container fluid>
+                    <Navbar.Brand href="/" className="text-light">FindDev</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="navbarScroll" />
+                    <Navbar.Collapse id="navbarScroll">
+                    <Nav
+                        className="me-auto my-2 my-lg-0"
+                        style={{ maxHeight: '100px' }}
+                        navbarScroll
+                    >
+                    </Nav>
+                    <Form className="d-flex">
+                        <Form.Control
+                        type="search"
+                        placeholder="Find Profile"
+                        className="me-2"
+                        aria-label="Search"
+                        onChange={handleProfileChange}
+                        />
+                        <Button variant="success" onClick={handleClick}>Search</Button>
+                    </Form>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
         </header>
     );
 }

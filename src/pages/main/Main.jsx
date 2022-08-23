@@ -1,30 +1,29 @@
-import { Button } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { useProfile } from "../../context/ProfileContext";
 
-export function Main(avatar){
+export function Main(){
 
     const {
-        loadData,
-        getProfile,
-        handleClick
+        getLoad,
+        getProfile
     } = useProfile();
 
-    avatar = handleClick();
+    let username = getLoad();
+
+    if(username) {
+        username = getProfile();
+    }
 
     return (
         
-        <section className="vh-100 bg-dark d-flex justify-content-center align-items-center flex-column">
-        {!avatar ? (
-            <div>
-                <img src={avatar} className="bg-white rounded-circle" style={{width: "200px", height: "200px"}}></img>
-            </div>
-        ) : (
-            <div>
-                <p className="text-light">Hello</p>
-            </div>
-        )}
-        </section>
+        <div>
+            {username ? (
+                <img src={username}></img>
+            ) : (
+                <p>Olá</p>
+            )}
+        </div>
     
     )
 
