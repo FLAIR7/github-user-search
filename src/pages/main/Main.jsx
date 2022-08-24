@@ -1,25 +1,32 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";
+import { Profile } from "../../components/Profile";
 import { useProfile } from "../../context/ProfileContext";
 
 export function Main(){
 
     const {
         getLoad,
-        getProfile
+        getProfile,
+        getUsers,
     } = useProfile();
 
     let username = getLoad();
+    let array = [];
 
     if(username) {
-        username = getProfile();
+        username = getLoad();
+        array = getUsers();
     }
 
     return (
         
         <div>
             {username ? (
-                <img src={username}></img>
+                array.map((a) => { 
+                    return <Profile name={a} key={a.id}/>
+                })
+
             ) : (
                 <p>Olá</p>
             )}

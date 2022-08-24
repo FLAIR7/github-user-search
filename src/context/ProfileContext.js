@@ -3,7 +3,6 @@ import { Route } from "react-router-dom";
 import { Main } from "../pages/main/Main";
 import { RoutePages } from "../routes/RoutePages";
 
-
 const ProfileContext = React.createContext();
 
 export function useProfile(){
@@ -39,9 +38,12 @@ export function ProfileProvider({children}){
             })
             .then(item => {
                 setProfile(item.avatar_url);
-                for(var key in item) {
-                    user.push(item[key]);
-                }
+                // user.push(item.items);
+                
+                item.items.map(a => {
+                     user.push(a);
+                })
+
                 console.log(user);
             })
             
@@ -53,11 +55,17 @@ export function ProfileProvider({children}){
     }
 
     function getLoad(){
-        return load ? load : false;
+        return load ? user : false;
     }
 
+    function getUsers(){
+        return user;
+    }
+
+
+
     return (
-        <ProfileContext.Provider value={{loadData, handleProfileChange, handleClick,getProfile, getLoad}}>
+        <ProfileContext.Provider value={{loadData, handleProfileChange, handleClick,getProfile, getLoad, getUsers}}>
             {children}
         </ProfileContext.Provider>
     )
