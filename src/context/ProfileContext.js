@@ -31,14 +31,13 @@ export function ProfileProvider({children}){
     }
 
     function loadData(){
-        
+        user.length = 0; // clears the array
         fetch(`https://api.github.com/search/users?q=${profile}&page?=1&per_page=10`)
             .then(data => {
                 return data.json();
             })
             .then(item => {
                 setProfile(item.avatar_url);
-                // user.push(item.items);
                 
                 item.items.map(a => {
                      user.push(a);
