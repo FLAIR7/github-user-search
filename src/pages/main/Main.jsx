@@ -24,7 +24,7 @@ export function Main(){
         <div>
             {username ? (
                 array.map((a) => { 
-                    return <Profile name={a} key={a.id}/>
+                    return <Profile user={a} key={a.id}/>
                 })
 
             ) : (
