@@ -25,15 +25,16 @@ export function Header(){
                         navbarScroll
                     >
                     </Nav>
-                    <Form className="d-flex">
+                    <Form className="d-flex" onSubmit={handleClick}>
                         <Form.Control
                         type="search"
                         placeholder="Find Profile"
                         className="me-2"
                         aria-label="Search"
                         onChange={handleProfileChange}
+                        maxLength="39"
                         />
-                        <Button variant="success" onClick={handleClick}>Search</Button>
+                        <Button type="button" variant="success" onClick={handleClick}>Search</Button>
                     </Form>
                     </Navbar.Collapse>
                 </Container>

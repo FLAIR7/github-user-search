@@ -6,9 +6,7 @@ import { RoutePages } from './routes/RoutePages';
 
 
 function App() {
-
   
-
   return (
     <div>
       <ProfileProvider>

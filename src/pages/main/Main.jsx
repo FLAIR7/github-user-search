@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import { Profile } from "../../components/Profile";
@@ -7,12 +8,13 @@ export function Main(){
 
     const {
         getLoad,
-        getProfile,
         getUsers,
     } = useProfile();
 
     let username = getLoad();
     let array = [];
+
+    const [loading, setLoading] = useState(false);
 
     if(username) {
         username = getLoad();
@@ -21,17 +23,24 @@ export function Main(){
 
     return (
         
-        <div>
-            {username ? (
-                array.map((a) => { 
-                    return <Profile user={a} key={a.id}/>
-                })
-
-            ) : (
-                <p>Olá</p>
-            )}
+        <div className="container">
+            <Row md={2} xs={1} lg={3} className="g-3">
+                {username ? (
+                    array.map(a => {
+                        return (
+                            <Col key={a.id}>
+                                <Profile user={a}/>
+                            </Col>
+                        )
+                    })
+                    
+                ) : (
+                    <div className="d-flex align-items-center justify-content-center" style={{height: "90vh", width: "100vw"}}>
+                        <h1 >Try to Search A Profile</h1>
+                    </div>
+                )}
+            </Row>
         </div>
-    
     )
 
 

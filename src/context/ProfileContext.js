@@ -1,7 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
-import { Route } from "react-router-dom";
-import { Main } from "../pages/main/Main";
-import { RoutePages } from "../routes/RoutePages";
+import React, { useContext, useState } from "react";
 
 const ProfileContext = React.createContext();
 
@@ -16,14 +13,11 @@ export function ProfileProvider({children}){
 
     function handleProfileChange(e){
         let value = e.target.value;
-        if(!value  || !value.replace(/\s/g, '').length) {
-            console.log("Não passou");
-        } else {
-            setProfile(value);
-        }
+        if(value || value.replace(/\s/g, '').length) setProfile(value);
     }
 
     function handleClick(e){
+        e.preventDefault();
         if(profile){
             loadData();
             setLoad(true);
@@ -46,7 +40,7 @@ export function ProfileProvider({children}){
                 console.log(user);
             })
             
-        setProfile(null);
+        // setProfile(null);
     }
 
     function getProfile(){
@@ -61,10 +55,9 @@ export function ProfileProvider({children}){
         return user;
     }
 
-
-
     return (
-        <ProfileContext.Provider value={{loadData, handleProfileChange, handleClick,getProfile, getLoad, getUsers}}>
+        <ProfileContext.Provider value={{
+            loadData, handleProfileChange, handleClick,getProfile, getLoad, getUsers}}>
             {children}
         </ProfileContext.Provider>
     )
