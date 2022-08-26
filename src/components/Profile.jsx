@@ -1,12 +1,6 @@
 import { Card } from "react-bootstrap";
 
 export function Profile({user}){
-    // return (
-    //     <div>
-    //         <img src={user.avatar_url}/>
-    //         <p>{user.id}</p>
-    //     </div>
-    // ) 
     
     return (
         <Card className="h-100">

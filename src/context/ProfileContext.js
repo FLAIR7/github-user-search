@@ -26,14 +26,14 @@ export function ProfileProvider({children}){
 
     function loadData(){
         user.length = 0; // clears the array
-        fetch(`https://api.github.com/search/users?q=${profile}&page?=1&per_page=10`)
+        fetch(`https://api.github.com/search/users?q=${profile}&per_page=21`)
             .then(data => {
                 return data.json();
             })
-            .then(item => {
-                setProfile(item.avatar_url);
+            .then(json => {
+                setProfile(json.avatar_url);
                 
-                item.items.map(a => {
+                json.items.map(a => {
                      user.push(a);
                 })
 

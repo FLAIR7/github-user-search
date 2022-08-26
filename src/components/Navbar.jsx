@@ -13,10 +13,10 @@ export function Header(){
     } = useProfile();
 
     return (
-        <header className="text-light">
-            <Navbar bg="dark" expand="lg" variant="dark">
+        <header>
+            <Navbar bg="light" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="/" className="text-light">FindDev</Navbar.Brand>
+                    <Navbar.Brand href="/" className="text">Find Dev</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -25,6 +25,7 @@ export function Header(){
                         navbarScroll
                     >
                     </Nav>
+                    <Button>Change theme</Button>
                     <Form className="d-flex" onSubmit={handleClick}>
                         <Form.Control
                         type="search"

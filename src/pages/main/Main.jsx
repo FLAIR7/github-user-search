@@ -34,9 +34,10 @@ export function Main(){
                         )
                     })
                     
+                    
                 ) : (
-                    <div className="d-flex align-items-center justify-content-center" style={{height: "90vh", width: "100vw"}}>
-                        <h1 >Try to Search A Profile</h1>
+                    <div className="d-flex align-items-center justify-content-center" style={{height: "85vh", width: "100vw"}}>
+                        <h1 >Try to Search A Profile 😄</h1>
                     </div>
                 )}
             </Row>
