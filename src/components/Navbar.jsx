@@ -18,13 +18,11 @@ export function Header({theme, toggler}){
             <Navbar bg="light" expand="lg">
                 <Container fluid>
                     <Navbar.Brand href="/" className="text">Github Profile Search | </Navbar.Brand>
-                    {/* <ReactSwitch onChange={() => {}} checked={false} checkedIcon={false}
-                    uncheckedIcon={false}/> */}
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                     <Nav
                         className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
+                        style={{ maxHeight: '100px'}}
                         navbarScroll
                     >
                         <ReactSwitch 
@@ -33,7 +31,7 @@ export function Header({theme, toggler}){
                         checkedIcon={false}
                         uncheckedIcon={false}
                         handleDiameter={20}
-                        
+                        onColor="#000"
                         />
                     </Nav>
                     <Form className="d-flex" onSubmit={handleClick}>

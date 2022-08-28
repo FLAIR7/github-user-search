@@ -38,6 +38,14 @@ export function Main(){
                         <h1 >Try to Search A Profile 😄</h1>
                     </div>
                 )}
+
+                {array.length >= 21 ? (
+                    <div className="d-flex align-items-center justify-content-end" style={{width: "100vw"}}>
+                        <button>Next</button>
+                    </div>
+                ): (
+                    <div></div>
+                )}
             </Row>
         </div>
     )
