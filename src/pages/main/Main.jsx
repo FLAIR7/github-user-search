@@ -13,9 +13,7 @@ export function Main(){
 
     let username = getLoad();
     let array = [];
-
-    const [loading, setLoading] = useState(false);
-
+    
     if(username) {
         username = getLoad();
         array = getUsers();
@@ -23,7 +21,7 @@ export function Main(){
 
     return (
         
-        <div className="container">
+        <div className="container mt-3">
             <Row md={2} xs={1} lg={3} className="g-3">
                 {username ? (
                     array.map(a => {

@@ -21,4 +21,6 @@ export const GlobalStyles = createGlobalStyle`
         border: 2px solid ${props => props.theme.text};
     }
 
+    
+
 `;

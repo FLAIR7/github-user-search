@@ -4,8 +4,9 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import {Navbar} from 'react-bootstrap';
 import { useProfile } from '../context/ProfileContext';
+import ReactSwitch from 'react-switch';
 
-export function Header(){
+export function Header({theme, toggler}){
 
     const {
         handleProfileChange,
@@ -16,7 +17,9 @@ export function Header(){
         <header>
             <Navbar bg="light" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="/" className="text">Find Dev</Navbar.Brand>
+                    <Navbar.Brand href="/" className="text">Github Profile Search | </Navbar.Brand>
+                    {/* <ReactSwitch onChange={() => {}} checked={false} checkedIcon={false}
+                    uncheckedIcon={false}/> */}
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -24,8 +27,15 @@ export function Header(){
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
+                        <ReactSwitch 
+                        onChange={toggler} 
+                        checked={theme === "dark"} 
+                        checkedIcon={false}
+                        uncheckedIcon={false}
+                        handleDiameter={20}
+                        
+                        />
                     </Nav>
-                    <Button>Change theme</Button>
                     <Form className="d-flex" onSubmit={handleClick}>
                         <Form.Control
                         type="search"

@@ -1,14 +1,13 @@
-import { useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import './App.css';
 import { Footer } from './components/Footer';
 import { Header } from './components/Navbar';
-import { ProfileProvider, useProfile } from './context/ProfileContext';
+import { ProfileProvider } from './context/ProfileContext';
 import { RoutePages } from './routes/RoutePages';
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles} from "./themes.js";
 
 function App() {
-  
   const [theme, setTheme] = useState("dark");
 
   const themeToggler = () => {
@@ -20,7 +19,7 @@ function App() {
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
         <GlobalStyles/>
           <ProfileProvider>
-            <Header/>
+            <Header theme={theme} toggler={themeToggler} />
             <RoutePages/>
           </ProfileProvider>
           <Footer/>
