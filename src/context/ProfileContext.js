@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback, useEffect } from "react";
 
 const ProfileContext = React.createContext();
 
@@ -7,57 +7,72 @@ export function useProfile(){
 }
 
 export function ProfileProvider({children}){
-    const [profile, setProfile] = useState("");
+    const [userInput, setUserInput] = useState("");
     const [user, setUser] = useState([]);
     const [load, setLoad] = useState(false);
+    const [pages, setPages] = useState([]);
+    const [total, setTotal] = useState(0);
+    const [limit, setLimit] = useState(100);
+    const [currentPage, setCurrentPage] = useState(1);
 
     function handleProfileChange(e){
         let value = e.target.value;
-        if(value || value.replace(/\s/g, '').length) setProfile(value);
+        if(value || value.replace(/\s/g, '').length) setUserInput(value);
     }
 
     function handleClick(e){
         e.preventDefault();
-        if(profile){
+        if(userInput){
             loadData();
             setLoad(true);
         }
     }
 
-    function loadData(){
-        user.length = 0; // clears the array
-        fetch(`https://api.github.com/search/users?q=${profile}&per_page=21`)
-            .then(data => {
-                return data.json();
+    const loadData = useCallback(async () => {
+        user.length = 0;
+        await fetch(`https://api.github.com/search/users?q=${userInput}&per_page=21`)
+        .then(data => data.json())
+        .then(json => {
+            json.items.map(a => {
+                 user.push(a);
             })
-            .then(json => {
-                setProfile(json.avatar_url);
-                
-                json.items.map(a => {
-                     user.push(a);
-                })
 
-                console.log(user);
-            })
+            setTotal(json.total_count);
+            console.log(user);
+
+            const totalPages = Math.ceil(json.total_count / limit);
+            console.log(totalPages);
+            const arrayPages = [];
+            for(let i = 1; i <= totalPages; i++) {
+                arrayPages.push(i);
+            }
+
+            setPages(arrayPages);
             
-        // setProfile(null);
+        })
+    }, [pages, user, userInput, total, limit])
+
+    function getUserInput(){
+        return userInput ? userInput : "";
     }
 
-    function getProfile(){
-        return profile ? profile : null;
-    }
-
-    function getLoad(){
-        return load ? user : false;
-    }
-
-    function getUsers(){
-        return user;
+    function increasePage(){
+        setPages(pages + 1);
+        loadData();
     }
 
     return (
         <ProfileContext.Provider value={{
-            loadData, handleProfileChange, handleClick,getProfile, getLoad, getUsers}}>
+            loadData, 
+            user,
+            load,
+            total,
+            pages,
+            handleProfileChange, 
+            handleClick,
+            getUserInput, 
+            increasePage}}
+        >
             {children}
         </ProfileContext.Provider>
     )

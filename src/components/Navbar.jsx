@@ -43,7 +43,7 @@ export function Header({theme, toggler}){
                         onChange={handleProfileChange}
                         maxLength="39"
                         />
-                        <Button type="button" variant="success" onClick={handleClick}>Search</Button>
+                        <Button type="button" variant="dark" onClick={handleClick}>Search</Button>
                     </Form>
                     </Navbar.Collapse>
                 </Container>
