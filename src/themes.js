@@ -21,6 +21,18 @@ export const GlobalStyles = createGlobalStyle`
         border: 2px solid ${props => props.theme.text};
     }
 
+    .myButton {
+        background-color: ${props => props.theme.body};
+        color: ${props => props.theme.text};
+        border: 2px solid ${props => props.theme.text};
+
+        
+    }
+
+    'myButton:hover' {
+        background-color: ${props => props.theme.body};
+    }
+
     
 
 `;

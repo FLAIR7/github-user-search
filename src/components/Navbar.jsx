@@ -5,12 +5,13 @@ import Nav from 'react-bootstrap/Nav';
 import {Navbar} from 'react-bootstrap';
 import { useProfile } from '../context/ProfileContext';
 import ReactSwitch from 'react-switch';
+import { useEffect } from 'react';
 
 export function Header({theme, toggler}){
 
     const {
         handleProfileChange,
-        handleClick
+        handleClick,
     } = useProfile();
 
     return (
