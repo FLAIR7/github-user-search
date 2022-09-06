@@ -33,6 +33,7 @@ export function ProfileProvider({children}){
 
     const fetchUsers = useCallback(async() => {
         setLoad(true);
+        console.log("CurrentPage dentro de fetch: ", currentPage);
         try {
             user.length = 0;
             const response = await fetch(`${BASE_URL}users?q=${userInput}&page=${currentPage}&per_page=41`, {cache: "no-cache"});
@@ -66,7 +67,7 @@ export function ProfileProvider({children}){
             console.log(error);
             setLoad(false);
         } 
-    }, [userInput, user, load, currentPage]);
+    }, [userInput, user, load]);
 
     const getUserInput = () => {
         return userInput ? userInput : "";
@@ -84,6 +85,7 @@ export function ProfileProvider({children}){
 
     useEffect(() => {
         fetchUsers();
+        console.log(currentPage);
     }, [userInput, currentPage]);
 
     return (

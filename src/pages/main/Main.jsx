@@ -13,7 +13,7 @@ export function Main(){
     }
 
     return (
-        <div className="container mt-3" style={{height: "85vh"}}>
+        <div className="container mt-3">
             <div className="d-flex align-items-center justify-content-center">
                 <h2>{resultTitle}</h2>
             </div>
