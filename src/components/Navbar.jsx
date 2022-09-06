@@ -1,3 +1,4 @@
+import React, { useEffect, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -5,14 +6,26 @@ import Nav from 'react-bootstrap/Nav';
 import {Navbar} from 'react-bootstrap';
 import { useProfile } from '../context/ProfileContext';
 import ReactSwitch from 'react-switch';
-import { useEffect } from 'react';
 
 export function Header({theme, toggler}){
+
+    const {setUserInput} = useProfile();
 
     const {
         handleProfileChange,
         handleClick,
     } = useProfile();
+
+    const searchText = useRef('');
+
+    useEffect(() => searchText.current.focus(), []); 
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            let value = searchText.current.value.trim();
+            if(value.replace(/\s/g, '').length) {
+                setUserInput(searchText.current.value);
+            } 
+        };
 
     return (
         <header>
@@ -35,16 +48,17 @@ export function Header({theme, toggler}){
                         onColor="#000"
                         />
                     </Nav>
-                    <Form className="d-flex" onSubmit={handleClick}>
+                    <Form className="d-flex" onSubmit={handleSubmit}>
                         <Form.Control
                         type="search"
                         placeholder="Find Profile"
                         className="me-2"
                         aria-label="Search"
-                        onChange={handleProfileChange}
+                        // onChange={handleProfileChange}
                         maxLength="39"
+                        ref={searchText}
                         />
-                        <Button type="button" variant="dark" onClick={handleClick}>Search</Button>
+                        <Button type="button" variant="dark" onClick={handleSubmit}>Search</Button>
                     </Form>
                     </Navbar.Collapse>
                 </Container>

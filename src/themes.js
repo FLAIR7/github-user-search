@@ -11,6 +11,7 @@ export const darkTheme = {
 };
 
 export const GlobalStyles = createGlobalStyle`
+
     body {
         background-color: ${props => props.theme.body};
         color: ${props => props.theme.text}
@@ -26,13 +27,10 @@ export const GlobalStyles = createGlobalStyle`
         color: ${props => props.theme.text};
         border: 2px solid ${props => props.theme.text};
 
-        
+        &:hover {
+            background-color: ${props => props.theme.text};
+            color: ${props => props.theme.body};
+            border: 2px solid ${props => props.theme.text};
+        }
     }
-
-    'myButton:hover' {
-        background-color: ${props => props.theme.body};
-    }
-
-    
-
 `;
