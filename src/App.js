@@ -6,6 +6,7 @@ import { ProfileProvider } from './context/ProfileContext';
 import { RoutePages } from './routes/RoutePages';
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles} from "./themes.js";
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const [theme, setTheme] = useState("dark");
@@ -20,6 +21,7 @@ function App() {
         <GlobalStyles/>
           <ProfileProvider>
             <Header theme={theme} toggler={themeToggler} />
+            <Outlet/>
             <RoutePages/>
           </ProfileProvider>
           <Footer/>

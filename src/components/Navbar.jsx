@@ -6,10 +6,12 @@ import Nav from 'react-bootstrap/Nav';
 import {Navbar} from 'react-bootstrap';
 import { useProfile } from '../context/ProfileContext';
 import ReactSwitch from 'react-switch';
+import { useNavigate } from 'react-router-dom';
 
 export function Header({theme, toggler}){
 
     const {setUserInput} = useProfile();
+    const navigate = useNavigate();
 
     const {
         handleProfileChange,
@@ -24,7 +26,9 @@ export function Header({theme, toggler}){
             let value = searchText.current.value.trim();
             if(value.replace(/\s/g, '').length) {
                 setUserInput(searchText.current.value);
-            } 
+            }
+            
+            navigate("/users");
         };
 
     return (

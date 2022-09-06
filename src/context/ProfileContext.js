@@ -25,7 +25,7 @@ export function ProfileProvider({children}){
     const handleClick = (e) => {
         e.preventDefault();
         if(userInput){
-            currentPage = 1;
+            setCurrentPage(1);
             fetchUsers();
             setLoad(true);
         }
@@ -35,15 +35,16 @@ export function ProfileProvider({children}){
         setLoad(true);
         try {
             user.length = 0;
-            const response = await fetch(`${BASE_URL}users?q=${userInput}&page=${currentPage}&per_page=20`, {cache: "no-cache"});
+            const response = await fetch(`${BASE_URL}users?q=${userInput}&page=${currentPage}&per_page=41`, {cache: "no-cache"});
             const data = await response.json();
             const docs = data.items;
             
             if(docs) {
-                const newUser = docs.slice(0, 20).map((singleUser) => {
-                    const {avatar_url, login} = singleUser;
+                const newUser = docs.slice(0, 41).map((singleUser) => {
+                    const {avatar_url, login, id} = singleUser;
 
                     return {
+                        id: id,
                         avatar_url: avatar_url,
                         login: login
                     }
@@ -63,27 +64,27 @@ export function ProfileProvider({children}){
             setLoad(false);
         } catch(error) {
             console.log(error);
-            // setLoad(false);
+            setLoad(false);
         } 
-    }, [userInput, user, load]);
+    }, [userInput, user, load, currentPage]);
 
     const getUserInput = () => {
         return userInput ? userInput : "";
     }
 
     const increasePage = () => {
-        currentPage += 1;
+        setCurrentPage(current => current + 1);
         fetchUsers();
     }
 
     const decreasePage = () => {
-        currentPage -= 1;
+        setCurrentPage(current => Math.max(0, current - 1));
         fetchUsers();
     }
 
     useEffect(() => {
         fetchUsers();
-    }, [userInput])
+    }, [userInput, currentPage]);
 
     return (
         <ProfileContext.Provider value={{
