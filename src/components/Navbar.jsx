@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 export function Header({theme, toggler}){
 
-    const {setUserInput} = useProfile();
+    const {setUserInput, setLoad} = useProfile();
     const navigate = useNavigate();
 
     const {
@@ -27,7 +27,7 @@ export function Header({theme, toggler}){
             if(value.replace(/\s/g, '').length) {
                 setUserInput(searchText.current.value);
             }
-            
+            setLoad(true);
             navigate("/users");
         };
 

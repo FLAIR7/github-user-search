@@ -11,37 +11,20 @@ const BASE_URL = "https://api.github.com/search/"
 export function ProfileProvider({children}){
     const [userInput, setUserInput] = useState("alek");
     const [user, setUser] = useState([]);
-    const [load, setLoad] = useState(true);
+    const [load, setLoad] = useState(false);
     const [resultTitle, setResultTitle] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
 
-    //let currentPage = 1;
-
-    const handleProfileChange =  async (e) => {
-        let value = e.target.value;
-        if(value || value.replace(/\s/g, '').length) setUserInput(value);
-    }
-
-    const handleClick = (e) => {
-        e.preventDefault();
-        if(userInput){
-            setCurrentPage(1);
-            fetchUsers();
-            setLoad(true);
-        }
-    }
-
     const fetchUsers = useCallback(async() => {
         setLoad(true);
-        console.log("CurrentPage dentro de fetch: ", currentPage);
         try {
             user.length = 0;
-            const response = await fetch(`${BASE_URL}users?q=${userInput}&page=${currentPage}&per_page=41`, {cache: "no-cache"});
+            const response = await fetch(`${BASE_URL}users?q=${userInput}&page=${currentPage}&per_page=54`, {cache: "no-cache"});
             const data = await response.json();
             const docs = data.items;
             
             if(docs) {
-                const newUser = docs.slice(0, 41).map((singleUser) => {
+                const newUser = docs.slice(0, 54).map((singleUser) => {
                     const {avatar_url, login, id} = singleUser;
 
                     return {
@@ -65,6 +48,7 @@ export function ProfileProvider({children}){
             setLoad(false);
         } catch(error) {
             console.log(error);
+            alert('API rate limit exceeded')
             setLoad(false);
         } 
     }, [userInput, user, load]);
@@ -97,8 +81,6 @@ export function ProfileProvider({children}){
             load,
             resultTitle,
             currentPage,
-            handleProfileChange, 
-            handleClick,
             decreasePage,
             setUser,
             setLoad,
